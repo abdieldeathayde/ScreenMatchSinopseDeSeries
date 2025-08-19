@@ -2,10 +2,24 @@ package br.com.alura.screenmatch.service;
 
 import com.theokanning.openai.completion.CompletionRequest;
 import com.theokanning.openai.service.OpenAiService;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import java.time.Duration;
+
 
 public class ConsultaChatGPT {
+
+    private final OpenAiService service;
+
+    public ConsultaChatGPT(@Value("${openai.api.key}") String apiKey) {
+        // Aumenta o timeout para 60 segundos
+        this.service = new OpenAiService(apiKey, Duration.ofSeconds(60));
+    }
+
     public static String obterTraducao(String texto) {
         OpenAiService service = new OpenAiService(System.getenv("OPENAI_API"));
+
 
         CompletionRequest requisicao = CompletionRequest.builder()
                 .model("gpt-4o-mini")
@@ -13,6 +27,7 @@ public class ConsultaChatGPT {
                 .maxTokens(1000)
                 .temperature(0.7)
                 .build();
+
 
         var resposta = service.createCompletion(requisicao);
         return resposta.getChoices().get(0).getText();
