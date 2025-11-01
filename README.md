@@ -104,7 +104,7 @@ LinkedIn: (inserir sua URL aqui)
 
 ## 📝 Licença
 
-Este projeto está licenciado sob a [MIT License](LICENSE) (ou outra licença que você escolher).
+Este projeto está licenciado sob a [MIT License](LICENSE)
 
 ```
 
